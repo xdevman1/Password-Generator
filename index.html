@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="min-h-screen bg-background flex items-center justify-center p-4">
+        <div class="w-full max-w-md space-y-6">
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-lock text-2xl text-primary"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-foreground">Secure Your Passwords</h1>
+                <p class="text-muted-foreground text-sm leading-relaxed">
+                   Generate a strong and better password to enhance your online security. You may never know who or when your password will be leaked or hacked.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-foreground">Password Length</label>
+                        <div class="relative">
+                            <input type="text" id="lengthDisplay" class="input text-center font-mono" value="16-32" readonly>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <input type="range" id="lengthSlider" min="4" max="50" value="16" class="slider w-full">
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="text-sm font-medium text-foreground">Include:</label>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-foreground">Uppercase Letters</span>
+                            <label class="switch">
+                                <input type="checkbox" id="uppercase" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-foreground">Lowercase Letters</span>
+                            <label class="switch">
+                                <input type="checkbox" id="lowercase" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-foreground">Numbers</span>
+                            <label class="switch">
+                                <input type="checkbox" id="numbers" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-foreground">Symbols</span>
+                            <label class="switch">
+                                <input type="checkbox" id="symbols" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-foreground">Exclude Similar</span>
+                            <label class="switch">
+                                <input type="checkbox" id="excludeSimilar">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button id="generateBtn" class="btn-primary w-full">
+                        Generate Password
+                    </button>
+
+                    <div class="space-y-2">
+                        <div class="relative">
+                            <input type="text" id="passwordOutput" class="input font-mono pr-12" readonly placeholder="Click generate to create password">
+                            <button id="copyBtn" class="absolute right-2 top-1/2 -translate-y-1/2 btn-ghost p-2">
+                                Copy
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-muted-foreground">Password Strength</span>
+                                <span id="strengthText" class="text-muted-foreground">Generate a password</span>
+                            </div>
+                            <div class="strength-bar">
+                                <div id="strengthFill" class="strength-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert">
+                <i class="fas fa-shield-alt text-primary"></i>
+                <div class="text-xs leading-relaxed">
+                    <strong>Your generated passwords are never saved on our servers.</strong> All data is stored locally in your browser. 
+                    For complete transparency, visit our <a href="https://github.com/xdevman1/Password-Generator" target="_blank" class="text-primary hover:underline">GitHub repository</a>.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-foreground">Recent Passwords</h3>
+                    <button id="downloadBtn" class="btn-ghost p-2" title="Download passwords">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+                <div id="passwordHistory" class="space-y-2 mb-4"></div>
+                <button id="clearHistory" class="btn-secondary w-full">
+                    <i class="fas fa-trash mr-2"></i>
+                    Clear History
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        <i class="fas fa-check"></i>
+        <span>Password copied to clipboard!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
